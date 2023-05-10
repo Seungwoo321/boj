@@ -1,6 +1,6 @@
 # BaekJoon Online Judge
 
-- [ ] 인프런 cpp 코딩 테스트 js로 풀기
+- [ ] 인프런 강의 10주완성 C++ 코딩테스트 | 알고리즘 코딩테스트 - JavaScript로 풀기 (진행중)
 
 ## Profile
 
