@@ -9,7 +9,7 @@ TIME_LIMIT=$2
 # 메모리 제한 (바이트 단위)
 MEM_LIMIT=$(($3 * 1024 * 1024))
 
-echo "[$(date +"%Y-%m-%d %T")] Start executing $FILENAME (Memory limit: $2MB, Time limit: $TIME_LIMIT s)"
+echo "[$(date +"%Y-%m-%d %T")] Start executing $FILENAME (Memory limit: $3MB, Time limit: $TIME_LIMIT s)"
 
 # 실행 시간 제한 설정
 ( timeout --preserve-status --kill-after=5 $TIME_LIMIT node $FILENAME > stdout.txt 2> stderr.txt ) & pid=$!
