@@ -5,33 +5,35 @@ const [n, arr] = require('fs')
     .trim()
     .split('\n');
 function solution (n, arr) {
-    const lis = new Array(n + 1).fill(0);
-    const tmp = [0, arr[0]];
-    const insertIndex = value => {
+    const lowerBound = (value, list) => {
         let left = 0;
-        let right = tmp.length
-        let index = 0;
+        let right = list.length
         while (left <= right) {
             const mid = Math.floor((left + right) / 2);
-            if (tmp[mid] < value) {
+            if (list[mid] < value) {
                 left = mid + 1;
-                // index = mid;
             } else {
                 right = mid - 1;
-                index = mid
             }
         }
-        return index;
+        return left;
     }
-    const answer = []
+    const idxes = [1];
+    const lis = [arr[0]];
     for (let i = 1; i < n; i++) {
-        const index = insertIndex(arr[i]);
-        tmp[index] = arr[i];
-        lis[i] = lis[index] + 1;
-        console.log(tmp)
-        console.log(lis)
+        const index = lowerBound(arr[i], lis);
+        if (index === lis.length) lis.push(arr[i]);
+        else lis[index] = arr[i];
+        idxes.push(index + 1);
     }
-
-    // return [lis.length, lis.join(' ')].join('\n');
+    const answer = [];
+    let i = idxes.length - 1;
+    while (answer.length < lis.length) {
+        if (idxes[i] === lis.length - answer.length) {
+            answer.push(arr[i]);
+        }
+        i--;
+    }
+    return [lis.length, answer.reverse().join(' ')].join('\n');
 }
 console.log(solution(+n, arr.split(' ').map(Number)));
