@@ -5,33 +5,33 @@ const [n, arr] = require('fs')
     .trim()
     .split('\n');
 function solution (n, arr) {
-    const prev = new Array(n).fill(-1);
-    const dp = new Array(n).fill(1);
-    let count = 0;
-    let index = 0;
-    for (let i = 0; i < n; i ++) {
-        for (let j = 0; j < i; j ++) {
-            if (arr[i] > arr[j] && dp[j] + 1 > dp[i]) {
-                dp[i] = dp[j] + 1;
-                prev[i] = j;
-                if (dp[i] > count) {
-                    count = dp[i];
-                    index = i;
-                }
+    const lis = new Array(n + 1).fill(0);
+    const tmp = [0, arr[0]];
+    const insertIndex = value => {
+        let left = 0;
+        let right = tmp.length
+        let index = 0;
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            if (tmp[mid] < value) {
+                left = mid + 1;
+                // index = mid;
+            } else {
+                right = mid - 1;
+                index = mid
             }
         }
+        return index;
     }
-    let i = prev.length;
-    const answer = [];
-    while (i > 0) {
-        if (answer.length === count) break;
-        if (arr[i] > 0) {
-            answer.unshift(arr[i]);
-            i = prev[i];
-        } else {
-            i--;
-        }
+    const answer = []
+    for (let i = 1; i < n; i++) {
+        const index = insertIndex(arr[i]);
+        tmp[index] = arr[i];
+        lis[i] = lis[index] + 1;
+        console.log(tmp)
+        console.log(lis)
     }
-    return [count, answer.join(' ')].join('\n');
+
+    // return [lis.length, lis.join(' ')].join('\n');
 }
 console.log(solution(+n, arr.split(' ').map(Number)));
