@@ -1,17 +1,17 @@
 const fn = require('../2670/');
 
-describe('2670 연속부분 최대곱', () => {
-    it('test 1', () => {
+describe('2670 연속부분 최대곱(실버4)', () => {
+    test('test 1', () => {
         expect(fn(
             3,
             [
                 0.9,
                 0.9,
                 1.0
-            ]).toString()).toBe('1.000')
+            ]).toString()).toEqual('1.000')
     });
 
-    it('test 2', () => {
+    test('test 2', () => {
         expect(fn(
             8,
             [
@@ -26,7 +26,7 @@ describe('2670 연속부분 최대곱', () => {
             ]).toString()).toBe('1.638')
     });
 
-    it('test 3', () => {
+    test('test 3', () => {
         expect(fn(
             5,
             [

@@ -1,26 +1,26 @@
 {
-  "name": "boj",
-  "version": "1.0.0",
-  "description": "[![Solved.ac 프로필](https://mazassumnida.wtf/api/generate_badge?boj=seungwoo321)](https://solved.ac/seungwoo321)",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Seungwoo321/boj.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Seungwoo321/boj/issues"
-  },
-  "homepage": "https://github.com/Seungwoo321/boj#readme",
-  "devDependencies": {
-    "jest": "^29.5.0"
-  },
-  "dependencies": {
-    "@types/jest": "^29.5.1"
-  }
+    "name": "boj",
+    "version": "1.0.0",
+    "description": "[![Solved.ac 프로필](https://mazassumnida.wtf/api/generate_badge?boj=seungwoo321)](https://solved.ac/seungwoo321)",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Seungwoo321/boj.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Seungwoo321/boj/issues"
+    },
+    "homepage": "https://github.com/Seungwoo321/boj#readme",
+    "devDependencies": {
+        "jest": "^29.5.0"
+    },
+    "dependencies": {
+        "@types/jest": "^29.5.2"
+    }
 }
