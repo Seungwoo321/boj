@@ -16,8 +16,8 @@ function solution(n, m, arr) {
     }
     const moveDirect = (channel) => {
         if (channel === 0) {
-            if (broken[channel]) return -1
-            return 1
+            if (broken[channel]) return -1;
+            else return 1;
         }
         let move = 0;
         while (channel > 0) {
@@ -32,14 +32,14 @@ function solution(n, m, arr) {
     }
     let answer = Math.abs(n - start);
     for (let i = 0; i < max; i++) {
-        let move = moveDirect(i);
+        const move = moveDirect(i);
         if (move > 0) {
             answer = Math.min(answer, move + Math.abs(n - i));
         }
     }
     return answer;
 }
-// console.log(solution(+n, +m, arr.split(' ').map(Number)));
+console.log(solution(+n, +m, arr ? arr.split(' ').map(Number) : []));
 
 module.exports = {
     solution

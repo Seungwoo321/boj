@@ -55,4 +55,12 @@ describe('1107 리모컨(골드5)', () => {
             [8, 9]
         ).toString()).toEqual('2228')
     });
+
+    test('test 8', () => {
+        expect(solution(
+            1000,
+            10,
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        ).toString()).toEqual('900')
+    })
 })
