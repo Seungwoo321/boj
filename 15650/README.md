@@ -10,17 +10,28 @@
 
 "중복 없이" 숫자를 고른다. 즉 순서가 중요하지 않다는 의미이다. 따라서 조합 문제라고 할 수 있다.
 
-조합 함수1
+조합 함수
 
-- 배열을 순회하면서 재귀 호출과 map함수로 새 배열을 만든다
-
-조합 함수2
-
-- dfs함수가 외부의 results를 변경하지만 익명함수로 감싸고 있기 때문에 외부에서 접근 할 수가 없다. 따라서 순수함수로 간주할 수 있다.
-
-조합 함수3, 4
-
-- 조합 함수 안에서 내부 함수를 작성해서 호출한다
+```js
+function solution2 (n, m) {
+    const combination = (function () {
+        const results = [];
+        const recursive = (n, r, depth, tmp = []) => {
+            if (r === 0) {
+                return results.push(tmp.join(' '));
+            }
+            for (let i = depth; i <= n; i++) {
+                tmp.push(i);
+                dfs(n, r - 1, i + 1, tmp.slice());
+                tmp.pop();
+            }
+        }
+        recursive(n, m, 1);
+        return results;
+    }());
+    return combination.join('\n');
+}
+```
 
 ## 맞왜틀
 

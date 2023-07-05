@@ -30,30 +30,30 @@ function solution (n, m) {
 function solution2 (n, m) {
     const combination = (function () {
         const results = [];
-        const dfs = (n, r, start, tmp = []) => {
-            if (r === 0) return results.push(tmp);
-            for (let i = start; i <= n; i++) {
+        const recursive = (n, r, depth, tmp = []) => {
+            if (r === 0) {
+                return results.push(tmp.join(' '));
+            }
+            for (let i = depth; i <= n; i++) {
                 tmp.push(i);
-                dfs(n, r - 1, i + 1, tmp.slice());
+                recursive(n, r - 1, i + 1, tmp.slice());
                 tmp.pop();
             }
         }
-        dfs(n, m, 1);
+        recursive(n, m, 1);
         return results;
     }());
-    return combination.map(arr => arr.join(' ')).join('\n');
+    return combination.join('\n');
 }
-
-
 
 // 조합 함수 안에서 내부 dfs 함수를 호출한다.
 function solution3 (n, m) {
     const results = [];
-    (function dfs (n, r, start, tmp = []) {
+    (function recursive (n, r, depth, tmp = []) {
         if (r === 0) return results.push(tmp.join(' '));
-        for (let i = start; i <= n; i++) {
+        for (let i = depth; i <= n; i++) {
             tmp.push(i);
-            dfs(n, r - 1, i + 1, tmp);
+            recursive(n, r - 1, i + 1, tmp);
             tmp.pop();
         }
     }(n, m, 1));
@@ -62,29 +62,29 @@ function solution3 (n, m) {
 
 function solution4  (n, m) {
     const results = [];
-    const dfs = (n, r, start, tmp = []) => {
+    const recursive = (n, r, depth, tmp = []) => {
         if (r === 0) return results.push(tmp.join(' '));
-        for (let i = start; i <= n; i++) {
+        for (let i = depth; i <= n; i++) {
             tmp.push(i);
-            dfs(n, r - 1, i + 1, tmp);
+            recursive(n, r - 1, i + 1, tmp);
             tmp.pop();
         }
     }
-    dfs(n, m, 1);
+    recursive(n, m, 1);
     return results.join('\n');
 }
 
 const combination = (function (n, m) {
     let results = [];
-    const dfs = (n, r, start, tmp = []) => {
+    const recursive = (n, r, depth, tmp = []) => {
         if (r === 0) return results.push(tmp.join(' '));
-        for (let i = start; i <= n; i++) {
+        for (let i = depth; i <= n; i++) {
             tmp.push(i);
-            dfs(n, r - 1, i + 1, tmp);
+            recursive(n, r - 1, i + 1, tmp);
             tmp.pop();
         }
     }
-    dfs(n, m, 1);
+    recursive(n, m, 1);
     return results.join('\n');
 }(+n, +m));
 
