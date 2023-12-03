@@ -1,4 +1,4 @@
-const { solution } = require('../1107/solution');
+const { solution } = require('../gold/1107/solution');
 
 describe('1107 리모컨(골드5)', () => {
     test('test 1', () => {

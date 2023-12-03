@@ -1,4 +1,4 @@
-const { solution } = require('../14500/solution');
+const { solution } = require('../gold/14500/solution');
 
 describe('14500 테트로미노 (골드4)', () => {
 

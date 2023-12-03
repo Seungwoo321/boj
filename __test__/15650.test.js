@@ -1,4 +1,4 @@
-const { solution2 } = require('../15650/solution');
+const { solution2 } = require('../silver/15650/solution');
 
 describe('15650 N과 M(2) (실버3)', () => {
     test('test 1', () => {

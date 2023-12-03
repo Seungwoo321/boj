@@ -1,4 +1,4 @@
-const fn = require('../2670/');
+const fn = require('../silver/2670/');
 
 describe('2670 연속부분 최대곱(실버4)', () => {
     test('test 1', () => {
