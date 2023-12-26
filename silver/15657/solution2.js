@@ -11,19 +11,20 @@ function solution (n, m, arr) {
     if (m === 1) {
         return arr.join('\n');
     }
+    const result = [];
     const permutation = (j, depth, tmp) => {
         if (depth === m) {
-            return tmp.join(' ');
+            result.push(tmp.join(' '));
+            return 
         }
-        const result = [];
         for (let i = j; i < n; i ++) {
             tmp.push(arr[i]);
-            result.push(permutation(i, depth + 1, tmp));
+            permutation(i, depth + 1, tmp);
             tmp.pop();
         }
-        return result.join('\n');
     }
-    return permutation(0, 0, []);
+    permutation(0, 0, []);
+    return result.join('\n');
 }
 
 console.log(solution(...num, arr));
