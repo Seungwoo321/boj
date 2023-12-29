@@ -10,7 +10,8 @@ function solution (n, m, k, grid) {
     if (k === 1) {
         return Math.max.apply(null, grid.map(row => Math.max.apply(null, row)));
     }
-    let visited = Array.from({ length: n }, () => new Array(m).fill(0));
+    const visited = Array.from({ length: n }, () => new Array(m).fill(0));
+    const check = (y, x) => visited[y][x] || visited[y - 1]?.[x] || visited[y + 1]?.[x] || visited[y][x - 1] || visited[y][x + 1]
     const dfs = (start, depth, tmp) => {
         if (depth === k) {
             return tmp.reduce((acc, cur) => acc + cur, 0);
@@ -18,16 +19,10 @@ function solution (n, m, k, grid) {
         let result = -10000 * k;
         for (let i = start; i < n; i ++) {
             for (let j = 0; j < m; j ++) {
-                if (
-                    visited[i][j] ||
-                    visited[i - 1]?.[j] ||
-                    visited[i + 1]?.[j] ||
-                    visited[i][j - 1] ||
-                    visited[i][j + 1]
-                ) continue;
+                if (check(i, j)) continue;
                 visited[i][j] = 1;
                 tmp.push(grid[i][j]);
-                result = Math.max(dfs(i, depth + 1, tmp), result)
+                result = Math.max(dfs(i, depth + 1, tmp), result);
                 tmp.pop();
                 visited[i][j] = 0;
             }

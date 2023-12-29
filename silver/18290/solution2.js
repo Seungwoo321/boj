@@ -26,8 +26,8 @@ function solution (n, m, k, grid) {
                     visited[i][j + 1]
                 ) continue;
                 visited[i][j] = 1;
-                tmp[depth] = grid[i][j]
-                result = Math.max(dfs(i, depth + 1, tmp), result)
+                tmp[depth] = grid[i][j];
+                result = Math.max(dfs(i, depth + 1, tmp), result);
                 visited[i][j] = 0;
             }
         }
@@ -45,7 +45,7 @@ function run (input) {
         .trim()
         .split('\n')
         .map(row => row.trim().split(' ').map(Number));
-    return solution(...num, arr);
+    return solution2(...num, arr);
 }
 module.exports = {
     run
