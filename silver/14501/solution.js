@@ -4,19 +4,24 @@ const [num, ...arr] = require('fs')
     .toString()
     .trim()
     .split('\n');
-    function soluton (n, arr) {
-    const recursive = (depth) => {
-        if (n <= depth) {
-            console.log(arr[depth]?.[1])
-            return
+function soluton (n, arr) {
+    const recursive = (index, totalPoint) => {
+        if (!arr[index]) return totalPoint
+        const nextIndex = arr[index][0] + index
+        if (arr[nextIndex]) {
+            return recursive(nextIndex, totalPoint + arr[index][1]);
+        } else {
+            // return recursive(nextIndex, totalPoint)
+            return totalPoint
         }
-        return recursive(depth + arr[depth]?.[0])
-        // for (let i = depth; i < n; i ++) {
-            // maxCost = Math.max(maxCost, recursive(i + arr[i][0], arr[i + arr[i][0]] ? sum + arr[i][1] : sum));
-            // maxCost = Math.max(, recursive(i + arr[i][0], sum))
     }
-    return recursive(0, 0);
-
+    let maxPoint = 0;
+    console.log(recursive(1, 0))
+    for (let i = 0; i < n; i++) {
+        // maxPoint = Math.max(maxPoint, recursive(i, 0));
+        // console.log(recursive(i, 0))
+    }
+    return maxPoint;
 }
 
 console.log(soluton(+num, arr.map(r => r.split(' ').map(Number))));
