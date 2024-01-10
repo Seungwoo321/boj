@@ -5,26 +5,42 @@ const [n, ...arr] = require('fs')
     .trim()
     .split('\n');
 
-function solution (n, powers) {
+function solution (n, arr) {
 
-
-    const result = []
-    const permutation = (arr, r, depth, tmp) => {
-        if (tmp.length === r) {
-            result.push([...tmp])
-            return
+    const score = (startTeam, linkTeam) => {
+        let [startScore, linkScore] = [0, 0];
+        for (let i = 0; i < n; i ++) {
+            for (let j = 0; j < n; j ++) {
+                startScore += +arr[startTeam[i]]?.[startTeam[j]] || 0;
+                linkScore += +arr[linkTeam[i]]?.[linkTeam[j]] || 0;
+            }
         }
-        for (let i = depth; i < arr.length; i ++) {
-            tmp.push(i);
-            permutation(arr, r, i + 1, tmp);
-            tmp.pop();
-        }
+        return Math.abs(startScore - linkScore);
     }
-    permutation(Array.from({ length: n }, (_, i) => i), 2, 0, [])
-    console.log(result)
-    // for (let i = 2; i < n - 1; i ++) {
-    // }
-    
+
+    const divideTeam = (member, startTeam, linkTeam, result) => {
+        if (member > n) {
+            if (!startTeam.length || !linkTeam.length) return;
+            result.push([[...startTeam], [...linkTeam]])
+            return;
+        }
+        startTeam.push(member);
+        divideTeam(member + 1, startTeam, linkTeam, result);
+        startTeam.pop();
+
+        linkTeam.push(member);
+        divideTeam(member + 1, startTeam, linkTeam, result);
+        linkTeam.pop();
+    }
+    const result = [];
+    divideTeam(0, [], [], result);
+
+    let powerBalance = Infinity
+    for (let i = 0; i < result.length; i ++) {
+        const [start, link] = result[i];
+        powerBalance = Math.min(powerBalance, score(start, link))
+    }
+    return powerBalance;
 }
 
 console.log(solution(+n, arr.map(r => r.split(' ').map(Number))));
