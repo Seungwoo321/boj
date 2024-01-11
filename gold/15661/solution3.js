@@ -18,7 +18,7 @@ function solution (n, arr) {
     const divideTeam = (member, startTeam, linkTeam, result) => {
         if (member > n - 1) {
             if (!startTeam.length || !linkTeam.length) return;
-            result.push([[...startTeam], [...linkTeam]])
+            result.push([Math.abs(calculateScore(startTeam) - calculateScore(linkTeam))]);
             return;
         }
         startTeam.push(member);
@@ -31,12 +31,7 @@ function solution (n, arr) {
     }
     const result = [];
     divideTeam(0, [], [], result);
-    let powerBalance = Infinity;
-    for (let i = 0; i < result.length; i ++) {
-        const [startTeam, linkTeam] = result[i];
-        powerBalance = Math.min(powerBalance, Math.abs(calculateScore(startTeam) - calculateScore(linkTeam)));
-    }
-    return powerBalance;
+    return Math.min.apply(null, result);
 }
 
 console.log(solution(+n, arr.map(r => r.split(' ').map(Number))));
