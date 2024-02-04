@@ -5,24 +5,48 @@ const [n, arr] = require('fs')
     .trim()
     .split('\n');
 function solution (n, arr) {
-
-
-
-    const isMinus = (a, b) => a - b < 0
-    const isPlus = (a, b) => a + b > 0
-    const isZero = (a, b) => a - b === 0 || a + b === 0
-
-    const recursive = (depth, m) => {
-        if (depth === n) {
-            return
+    const matrix = Array.from({ length: n }, (_) => new Array(n).fill(''));
+    let k = 0;
+    for (let i = 0; i < n; i++) {
+        for (let j = i; j < n; j++) {
+            matrix[i][j] = arr[k] === '+' ? 1 : arr[k] === '-' ? -1 : 0;
+            k++;
         }
-        for (let i = 0; i < m; i ++) {
-            console.log(i, depth, m, n)
-            // console.log(arr[i + (depth * (i + 1))], i + (depth * i))
-        }
-        recursive(depth + 1, m - 1)
     }
-    recursive(0, n)
+    const results = [];
+    const validSequence = (signIndex) => {
+        let sum = 0;
+        for (let i = signIndex; i >= 0; i --) {
+            sum += results[i];
+            const sign = matrix[i][signIndex];
+            if (
+                (sum > 0 && sign !==  1) ||
+                (sum < 0 && sign !== -1) ||
+                (sum === 0 && sign !== 0)
+            ) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    const recursive = (index) => {
+        if (index === n) {
+            return true;
+        }
+        const sign = matrix[index][index];
+        for (let i = 1; i <= 10; i++) {
+            results.push(i * sign);
+            if (validSequence(index)) {
+                if (recursive(index + 1)) {
+                    return true;
+                }
+            }
+            results.pop();
+        }
+        return false;
+    }
+    recursive(0);
+    return results.join(' ');
 }
-console.log(solution(+n, arr.split('')))
+console.log(solution(+n, arr.split('')));
