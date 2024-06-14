@@ -7,8 +7,8 @@
 - 맞은 경우: AC (Accepted)
 - 푸는 중인 경우: WIP(Work in Progress)
 - 틀린 경우 : WA (Wrong Answer)
-- 시간 복잡도 초과 : TLE (Time Limit Exceeded)
-- 메모리 복잡도 초과: MLE (Memory Limit Exceeded)
+- 시간 제한 초과 : TLE (Time Limit Exceeded)
+- 메모리 제한 초과: MLE (Memory Limit Exceeded)
 
 ### Bronze
 
