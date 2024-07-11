@@ -1,25 +1,25 @@
 // const filePath = '/dev/stdin';
-const filePath = './input';
-const input = require('fs')
+const filePath = require('path').join(__dirname, 'input')
+const [num, ...mapping] = require('fs')
     .readFileSync(filePath)
     .toString()
     .trim()
     .split('\n');
-const [num, ...mapping] = input;
-function solution (n, minimums, mapping) {
+function solution(n, minimums, mapping) {
     const [mp, mf, ms, mv] = minimums;
     let minCost = Infinity;
     let minMethods = '';
-    for (let i = 1; i < (1 << n); i ++) {
+    for (let i = 1; i < (1 << n); i++) {
         let [np, nf, ns, nv, cost, methods] = [0, 0, 0, 0, 0, ''];
-        for (let j = 0; j < n; j ++) {
+        for (let j = 0; j < n; j++) {
             if (i & (1 << j)) {
-                np += mapping[j][0];
-                nf += mapping[j][1];
-                ns += mapping[j][2];
-                nv += mapping[j][3];
-                cost += mapping[j][4];
-                methods+= j + 1 + ' ';
+                const row = mapping[j];
+                np += row[0];
+                nf += row[1];
+                ns += row[2];
+                nv += row[3];
+                cost += row[4];
+                methods += j + 1 + ' ';
             }
         }
         if (np >= mp && nf >= mf && ns >= ms && nv >= mv) {
@@ -31,4 +31,4 @@ function solution (n, minimums, mapping) {
     }
     return minCost === Infinity ? -1 : minCost + '\n' + minMethods;
 }
-console.log(solution(Number(num), mapping[0].split(' ').map(Number), mapping.slice(1).map(v => v.split(' ').map(Number))))
+console.log(solution(+num, mapping.shift().split(' ').map(Number), mapping.map(r => r.split(' ').map(Number))));
